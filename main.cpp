@@ -6,22 +6,17 @@ double f(double x){
     return sin(x) + log(x);
 }
 
-void addToFile(double *x, double *y){
+void addToFile(double *x){
     std::ofstream file("input.txt");
     for (int i = 0; i < 10; ++i) {
-        file << x[i] << " " << y[i] << "\n";
+        file << x[i] << " " << f(x[i]) << "\n";
     }
     file.close();
 }
 
 void addFuncToFile(){
-    double x[11]{1,2,3,4,5,6,7,8,9,10};
-    double y[11];
-    for (int i = 1; i <= 10; ++i) {
-        y[i] = f(x[i]);
-    }
-    addToFile(x,y);
-    return;
+    double x[10]{1,2,3,4,5,6,7,8,9,10};
+    addToFile(x);
 }
 
 double *getMatrix(double *x, int n){
@@ -70,7 +65,6 @@ double* solveGaussian(double* A, double* y, int n) {
             A[k * n + j] /= pivot;
         }
         y[k] /= pivot;
-
         for (int i = k + 1; i < n; ++i) {
             double factor = A[i * n + k];
             for (int j = k; j < n; ++j) {
@@ -102,7 +96,7 @@ double LX(double *a, double x){
 
 
 int main(){
-//    addFuncToFile();
+    addFuncToFile();
     double *x = new double[10];
     double *y = new double [10];
     if (readFromFile(x,y)){
@@ -117,37 +111,9 @@ int main(){
     }
     double *a = solveGaussian(m,y,10);
     for (int i = 0 ; i < 10; i++) std::cout<<a[i] << " ";
-    std::ofstream
-    for (double temp = 0.; temp <= 3; temp += 0.1){
-
+    std::ofstream file("output.txt");
+    for (double temp = 0.; temp <= 10; temp += 0.001){
+            file << temp << " " << LX(a, temp) << "\n";
     }
-//    for (int i = 0; i < 9;i++) {
-//        std::cout << i * 10 + i << "\t";
-//        for (int j = i + 1; j < 10; ++j) {
-//            for (int k = 0; k < 10; ++k) {
-//                std::cout << k;
-//            }
-//            std::cout << j << " ";
-//        }
-//        std::cout<< "\n";
-////        i+=10+i;
-////        double k = m[i*10] / m[i*10+10];
-////        for (int j = 0; j < 9; ++j) {
-////            std::cout << i << " " << j << "\n";
-////            m[(i+1)*10+j] -= k * m[i*10+j];
-////        }
-////        y[i+1] -= k * y[i];
-//    }
-////    for (int i = 0; i < 10; ++i) {
-////        for (int j = 0; j < 10; ++j) {
-////            std::cout << m[i * 10 + j] << " ";
-////        }
-////        std::cout << y[i] << "\n";
-////    }
-
-
-    
-
-
 }
 
