@@ -7,7 +7,7 @@ double f(double x){
 }
 
 void addToFile(double *x, double *y){
-    std::ofstream file("output.txt");
+    std::ofstream file("input.txt");
     for (int i = 0; i < 10; ++i) {
         file << x[i] << " " << y[i] << "\n";
     }
@@ -35,7 +35,7 @@ double *getMatrix(double *x, int n){
 }
 
 int readFromFile(double *x, double *y){
-    std::ifstream file("outpt.txt");
+    std::ifstream file("input.txt");
     if (!file){
       return 1;
     }
@@ -64,7 +64,7 @@ double* solveGaussian(double* A, double* y, int n) {
 
         double pivot = A[k * n + k];
         if (std::fabs(pivot) < 1e-9) {
-            throw std::runtime_error("Система не имеет единственного решения.");
+            throw std::runtime_error("ERROR");
         }
         for (int j = k; j < n; ++j) {
             A[k * n + j] /= pivot;
@@ -94,7 +94,7 @@ double* solveGaussian(double* A, double* y, int n) {
 double LX(double *a, double x){
     double res = 0;
     for (int i = 0; i < 10; ++i) {
-        res +=
+        res += a[i] * pow(x,i);
     }
     return res;
 }
@@ -117,6 +117,10 @@ int main(){
     }
     double *a = solveGaussian(m,y,10);
     for (int i = 0 ; i < 10; i++) std::cout<<a[i] << " ";
+    std::ofstream
+    for (double temp = 0.; temp <= 3; temp += 0.1){
+
+    }
 //    for (int i = 0; i < 9;i++) {
 //        std::cout << i * 10 + i << "\t";
 //        for (int j = i + 1; j < 10; ++j) {
